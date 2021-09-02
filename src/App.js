@@ -1,15 +1,16 @@
+// Import React
 import React, { Component} from 'react';
 import firebase from './Firebase';
 import Home from './Home';
 import Welcome from './Welcome';
-import Navigation from './Navigation'
-import Login from './Login'
-import Meetings from './Meetings'
-import Register from './Register'
-import CheckIn from './Checkin'
-import Attendees from './Attendees'
+import Navigation from './Navigation';
+import Login from './Login';
+import Meetings from './Meetings';
+import Register from './Register';
+import CheckIn from './Checkin';
+import Attendees from './Attendees';
 import './bootstrap.css';
-import { Router, navigate } from '@reach/router'
+import { Router, navigate } from '@reach/router';
 
 class App extends Component {
 
@@ -33,7 +34,7 @@ class App extends Component {
             userID: FBUser.uid
           });
         
-          const meetingsRef = firebase.database().ref('meetings/' + FBUser.uid);
+          const meetingsRef = firebase.database().ref('meetings/');
             meetingsRef.on('value', snapshot => {
               let meetings = snapshot.val();
               let meetingsList = [];
@@ -54,18 +55,11 @@ class App extends Component {
         this.setState({user: null});
       }
     })
-  // ============================ Used in the beginning to pull data from Firebase DB ==============
-    // const ref = firebase.database().ref('user');
-
-    // ref.on('value', snapshot => {
-    //   let FBUser = snapshot.val();
-    //   this.setState({user: FBUser });
-    // })
-    // ===========================================================================
   }
 
   registerUser = userName => {
-    firebase.auth().onAuthStateChanged(FBUser => {
+    let unSubscribe = firebase.auth().onAuthStateChanged(FBUser => {
+      if (FBUser) {
       FBUser.updateProfile({
         displayName: userName
       }).then(() => {
@@ -74,8 +68,10 @@ class App extends Component {
           displayName: FBUser.displayName,
           userID: FBUser.uid
         });
-        navigate('/meetings');
-      })
+        navigate('/meetings');      
+      })    
+    }
+    unSubscribe();
     })
   }
 

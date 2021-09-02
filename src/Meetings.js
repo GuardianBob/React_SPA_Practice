@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MeetingsList from './MeetingsList';
+import {FaPlus} from 'react-icons/fa';
 
 // Component from React can be called like above in brackets and referenced alone 
 // like below or it can be referenced below as "React.Component" without being imported above.
@@ -40,7 +41,7 @@ class Meetings extends Component {
         return (
             <div className="container mt-4">
                 <div className="row justify-content-center">
-                    <div className="col-md-8 text-center">
+                    <div className="col-md-6 text-center">
                         <h1 className="font-weight-light">Add a Meeting</h1>
                         <div className="card bg-light">
                             <div className="card-body text-center">
@@ -56,22 +57,20 @@ class Meetings extends Component {
                                         value={this.state.meetingName}
                                         onChange={this.handleChange}
                                     />
-                                        <div className="input-group-append">
-                                            <button
-                                            type="submit"
-                                            className="btn btn-sm btn-info"
-                                            id="buttonAdd"
-                                            >
-                                            +
-                                            </button>
-                                        </div>
+                                    <button
+                                        type="submit"
+                                        className="btn btn-sm btn-outline-info"
+                                        id="buttonAdd"
+                                        >
+                                        <FaPlus />
+                                    </button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-
-                    <div className="col-11 col-md-6 text-center">
+                <div className="row justify-content-center">
+                    <div className="col-md-6 text-center px-1">
                         <div className="card border-top-0 rounded-0">
                         {/* first part (before "&&" checks to see if meetings exist */}
                             {this.props.meetings && this.props.meetings.length ? (
@@ -91,6 +90,7 @@ class Meetings extends Component {
                     </div>
                 </div>
             </div>
+        </div>
         );
     }
 }

@@ -10,13 +10,13 @@ class Welcome extends Component {
             
         return (
             <div className="text-center mt-4" id="Welcome-component">
-                <span className="text-secondary font-weight-bold pl-1">
-                    Welcome {userName}
-                </span>, {' '}
-                <Link to="/login" className="font-weight-bold text-primary pl-1"
+                <span className="text-secondary font-weight-bold ps-1 me-1">
+                    Welcome {userName} 
+                </span>
+                {/* <Link to="/login" className="font-weight-bold text-primary ps-1"
                 onClick={e => logOutUser(e)}>
                     Log Out
-                </Link>
+                </Link> */}
             </div>
         );
     }
